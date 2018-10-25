@@ -4,6 +4,9 @@
 
 from bincrafters import build_template_default
 import platform
+import os
+
+os.environ['CONAN_USERNAME'] = os.environ.get('CONAN_USERNAME','conanos')
 
 if __name__ == "__main__":
 
