@@ -13,7 +13,7 @@ class PixmanConan(ConanFile):
     license = "GNU Lesser General Public License (LGPL) version 2.1 or the Mozilla Public License (MPL) version 1.1"
     settings = "os", "arch", "compiler", "build_type"
     options = {"shared": [True, False], "fPIC": [True, False]}
-    default_options = "shared=False", "fPIC=True"
+    default_options = "shared=True", "fPIC=True"
     exports_sources = ["*.patch"]
 
     folder = "{}-{}".format(name, version)
