@@ -13,7 +13,7 @@ class PixmanConan(ConanFile):
     license = "GNU Lesser General Public License (LGPL) version 2.1 or the Mozilla Public License (MPL) version 1.1"
     settings = "os", "arch", "compiler", "build_type"
     options = {"shared": [True, False], "fPIC": [True, False]}
-    default_options = "shared=True", "fPIC=True"
+    default_options = "shared=False", "fPIC=True"
     exports_sources = ["*.patch"]
 
     folder = "{}-{}".format(name, version)
@@ -21,8 +21,6 @@ class PixmanConan(ConanFile):
 
     def config_options(self):
         del self.settings.compiler.libcxx
-        if self.settings.compiler == "Visual Studio":
-            del self.options.shared
         if self.settings.os == 'Windows':
             del self.options.fPIC
 
