@@ -1,8 +1,8 @@
 ## Package Status
 
-| Bintray | Windows | Linux & macOS |
-|:--------:|:---------:|:-----------------:|
-|[![Download](https://api.bintray.com/packages/bincrafters/public-conan/pixman%3Abincrafters/images/download.svg) ](https://bintray.com/bincrafters/public-conan/pixman%3Abincrafters/_latestVersion)|[![Build status](https://ci.appveyor.com/api/projects/status/github/bincrafters/conan-pixman?svg=true)](https://ci.appveyor.com/project/bincrafters/conan-pixman)|[![Build Status](https://travis-ci.org/bincrafters/conan-pixman.svg)](https://travis-ci.org/bincrafters/conan-pixman)|
+| Windows | Linux & macOS |
+|:---------:|:-----------------:|
+|[![Build status](https://ci.appveyor.com/api/projects/status/github/conanos/pixman?svg=true)](https://ci.appveyor.com/project/Mingyiz/pixman)|[![Build Status](https://travis-ci.org/conanos/pixman.svg)](https://travis-ci.org/conanos/pixman)|
 
 ## Conan.io Information
 
