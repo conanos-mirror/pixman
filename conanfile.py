@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 
 from conans import ConanFile, AutoToolsBuildEnvironment, tools
-import os
+import os, shutil
 
 
 class PixmanConan(ConanFile):
@@ -58,6 +58,12 @@ class PixmanConan(ConanFile):
             var_args = " ".join("{}={}".format(k, v) for k, v in make_vars.items())
             self.run("make -C {}/pixman -f Makefile.win32 {}".format(self.folder, var_args),
                      win_bash=win_bash)
+            for s, r in {"@prefix@": self.package_folder,
+                         "@exec_prefix@":"${prefix}",
+                         "@libdir@":"${prefix}/lib",
+                         "@includedir@":"${prefix}/include",
+                         "@PACKAGE_VERSION@":self.version}.items():
+                tools.replace_in_file(os.path.join(self.folder, 'pixman-1.pc.in'),s,r)
         else:
             args = ["--disable-libpng", "--disable-gtk"]
             if self.options.shared:
@@ -84,6 +90,9 @@ class PixmanConan(ConanFile):
             self.copy(pattern="*.pdb", dst="lib", keep_path=False)
             self.copy(pattern="*{}pixman.h".format(os.sep), dst=self.includedir, keep_path=False)
             self.copy(pattern="*{}pixman-version.h".format(os.sep), dst=self.includedir, keep_path=False)
+            tools.mkdir(os.path.join(self.package_folder, "lib", "pkgconfig"))
+            shutil.copy2(os.path.join(self.folder, 'pixman-1.pc.in'),
+                         os.path.join(self.package_folder, "lib", "pkgconfig", 'pixman-1.pc'))
 
     def package_info(self):
         self.cpp_info.libs = tools.collect_libs(self)
