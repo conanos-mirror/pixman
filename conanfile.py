@@ -2,6 +2,7 @@
 # -*- coding: utf-8 -*-
 
 from conans import ConanFile, AutoToolsBuildEnvironment, tools
+from conanos.build import config_scheme
 import os, shutil
 
 
@@ -13,7 +14,7 @@ class PixmanConan(ConanFile):
     license = "GNU Lesser General Public License (LGPL) version 2.1 or the Mozilla Public License (MPL) version 1.1"
     settings = "os", "arch", "compiler", "build_type"
     options = {"shared": [True, False], "fPIC": [True, False]}
-    default_options = "shared=False", "fPIC=True"
+    default_options = "shared=True", "fPIC=True"
     exports_sources = ["*.patch"]
 
     folder = "{}-{}".format(name, version)
@@ -23,6 +24,9 @@ class PixmanConan(ConanFile):
         del self.settings.compiler.libcxx
         if self.settings.os == 'Windows':
             del self.options.fPIC
+    
+    def configure(self):
+        config_scheme(self)
 
     def build_requirements(self):
         if tools.os_info.is_windows:
